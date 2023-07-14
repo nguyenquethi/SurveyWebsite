@@ -1,0 +1,217 @@
+<% include ../partials/header.ejs %>
+<%- include ../partials/mainNav.ejs %>
+
+<style>
+    #ijsQuestionlength
+    {
+        display:none ;
+    }
+    hr{
+      display: none;
+    }
+    .userSurveyHeader{
+      background: #6B787F;
+      color: white;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    .side-white{
+      border-right:1px solid white;
+       
+    }
+  
+    tr,td{
+      background: white;
+      border: none;
+    }
+  
+    body{
+      background-color: #f0eeeea6; 
+  }
+ 
+
+  </style>
+    <!-- MAIN CONTENT -->
+
+   
+
+  <div class="container bg-white">
+ 
+  
+    
+    <h1><%= title %></h1>
+
+    <div class="row">
+    <h2 class="display-4 text-success"><%= survey.surveyName %></h2>
+
+    <p class="lead"> 
+        <%= survey.surveyDescription%>
+      </p>
+     </div>
+
+    <br><br><br><br>
+   <!--Questions-->
+ 
+
+
+     <!--      -->
+        
+     
+     <!--    -->
+     <div class="row">
+        <h3 class="lead"> Total number of Participants till date : <%= survey.respondents;  %></h3>
+
+        <a href="/surveys/createcsv/<%=survey._id %>" class="btn btn-success col-md-3 " style="margin-right: 10px;">
+            Download CSV 
+            </a>
+            <a href="/surveys/createxl/<%=survey._id %>" class="btn btn-success col-md-3 offset-md-2 offset-lg-2  ">
+                Download Excel 
+                </a>
+     </div>
+
+    
+      
+     <% for(let x=0;x<questionList.length;x++)   { %>
+        <div class="row">
+
+          
+
+ 
+<div class="col-md-4 " style="">
+
+    <h6 class="lead"> For Q<%= x+1%>. <%= questionList[x];  %></h6>
+       
+        <%  for(let y=0;y<answeredratio['Question'+`${x+1}`].length;y++) { %>
+               <% var result=(answeredratio['Question'+`${x+1}`][y]+" was selected by " +answeredratio['Question'+`${x+1}`][y+1]+" person(s)");%>
+               <div class="lead">  <%= result %> </div>
+            <% y=y+1; %>
+   
+            <%  } %>
+        </div>
+
+ 
+ 
+            <div class="col-md-4  offset-md-2  offset-lg-1">
+        
+                <table class="table table-bordered table-striped table-hover  ">
+                    <thead>
+                      <tr class="userSurveyHeader"> 
+                           
+                          
+                          
+                          <th class="text-center">Question <%= x+1 %> Opinions</th>
+                          <th class="text-center">User response</th>
+                           
+        
+                        
+                      </tr>
+                      </thead>
+                      <tbody> 
+                        
+                        <% if(typeof displayName === 'string' && displayName ){ %>
+                      <% for(let y=0;y<answeredratio['Question'+`${x+1}`].length;y++) { %>
+                      <tr style="background-color: white;">
+                       
+                        <td class="text-center"><%= answeredratio['Question'+`${x+1}`][y] %></td>
+                        <td class="row"><div class="col-md-6 text-center" style=""><%= answeredratio['Question'+`${x+1}`][y+1] %> </div> <div class="col-md-6 text-center"><%=  100* (answeredratio['Question'+`${x+1}`][y+1] /survey.respondents) %>%</div>  </td>
+                        
+                          
+                        <% y=y+1; %>
+        
+               
+                    </tr>
+                      <% } %>
+                      <% } %>
+                    </tbody>
+                  </table>
+        
+            </div>
+            
+       
+        
+        
+
+       
+
+                
+            <div class="col-md-4"  style="display:inline-block;"> <canvas id="myChart<%= x %>" width="200" height="200"></canvas></div>
+            
+             <% { %>
+
+
+
+             <script>
+               var b= '    <%- JSON.stringify(`Q`+(x+1)+`. `+questionList[x]) %>';
+                // b=JSON.parse();
+ 
+              var opinion='<%-  JSON.stringify(answeroptions[`Question`+`${x+1}`]) %>'
+ 
+              var opinionCnt ='<%-  JSON.stringify(answeredratio[`Question`+`${x+1}`]) %>' ;
+ 
+              opinionCnt =JSON.parse(opinionCnt);
+                 opinionCntFinal= new Array();
+              for(i=0;i<opinionCnt.length;i++)
+              {
+                 opinionCntFinal.push(opinionCnt[i+1])
+                 i=i+1;
+              }
+ 
+              //var opinioncount='  
+             // alert(opinionCntFinal);
+  
+             var ctx = document.getElementById(`myChart`+'<%-  JSON.stringify(x) %>').getContext('2d');
+             ctx.canvas.parentNode.style.height = '400px';
+             ctx.canvas.parentNode.style.width = '400px';
+             var myChart = new Chart(ctx, {
+                 type: 'pie',
+                 data: {
+                     labels:JSON.parse(opinion),
+                     datasets: [{
+                         label:b ,
+                         data: opinionCntFinal,
+                         backgroundColor: [
+                             'rgb( 255, 132, 0.2)',
+                             'rgb( 162, 135, 0.2)',
+                             'rgb( 26, 86, 122)',
+                             'rgb( 192, 192, 0.2)',
+                             'rgba(153, 102, 255, 0.2)',
+                             'rgba(255, 159, 64, 0.2)'
+                         ],
+                         borderColor: [
+                             'rgba(255, 99, 132, 1)',
+                             'rgba(54, 162, 235, 1)',
+                             'rgba(255, 206, 86, 1)',
+                             'rgba(75, 192, 192, 1)',
+                             'rgba(153, 102, 255, 1)',
+                             'rgba(255, 159, 64, 1)'
+                         ],
+                         borderWidth: 1
+                     }]
+                 },
+                 options: {
+                     scales: {
+                         y: {
+                             beginAtZero: true
+                         }
+                     }
+                 }
+             });
+             </script>
+    <% } %>
+ 
+   
+            <%  } %>
+
+       
+
+  </div>
+
+ 
+
+    <!---->
+  
+    <script src="/Scripts/i2.js">
+
+
+    </script>
+
+<% include ../partials/footer.ejs %>

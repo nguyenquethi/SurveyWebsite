@@ -1,0 +1,257 @@
+<% include ../partials/header.ejs %>
+<%- include ../partials/mainNav.ejs %>
+
+<style>
+    #ijsQuestionlength
+    {
+        display:none ;
+    }
+    hr{
+      display: none;
+    }
+
+</style>
+
+
+
+
+<div class="container bg-white">
+  
+<form class="form-horizontal col-md-12" method="post" id="form"  >
+  <h1><%= title %></h1>
+
+  <div class="row">
+  <h2 class="display-4 text-success"><%= survey.surveyName %></h2>
+  
+ 
+   </div>
+
+   <div class="row" onmouseenter="canEdit(this)" onmouseleave="cantEdit(this)" onkeyup="canEdit(this)" >
+    <textarea name="surveyDescription" class="lead form-control" style="border: none; margin: 10PX; width: 80%;" required readonly="readonly"   > 
+      <%= survey.surveyDescription%>
+    </textarea>
+ 
+    <a href="#" class="btn btn-white  col-md-1   d-none d-md-block d-none d-lg-block canEdit "  onclick="editable(this)" style="visibility: hidden;">
+             
+      <i class="fas fa-pencil-alt fa-1x"></i>
+      </a>
+
+
+      <a href="#" class="btn btn-white btn-xs col-md-1  d-none d-md-block d-none d-lg-block canEdit" onclick="notEditable(this)" style="visibility: hidden;">
+     
+        <i class="far fa-stop-circle"></i>
+        </a>
+
+   </div>
+
+  <br>
+
+
+  <%  console.log(survey.active)  %>  
+  <%  if(survey.active=="on") { %>   
+    <div class="form-check form-switch">
+    <input name=""  type="checkbox"  class="form-check-input"  id="flexSwitchCheckChecked" onchange="checkitout(this)" id="flexSwitchCheckChecked" checked      />
+    <label class="form-check-label" for="flexSwitchCheckChecked"
+      >Activate</label
+    >
+  </div>
+ 
+<%   } else {%>  
+    <div class="form-check form-switch">
+      <input name=""   class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"  onchange="checkitout(this)"     />
+      <label class="form-check-label" for="flexSwitchCheckChecked"
+        >Activate</label
+      >
+    </div>
+  
+    <%   }%> 
+
+  <br>
+
+  <input name="active" id="ActiveState" type="text" style="display: none;">
+ <!--Questions-->
+
+ <%  if(survey.Questionnaire_type=="multiplechoice") { %>  
+  <div class="row">
+  <input id="ijsQuestionlength" name="Questionlength" value ="<%=survey.Questionlength %>">
+<% for (let count = 0; count < survey.Questionlength; count++) { %>
+  
+
+    <%
+    let question =`Question${count+1}`;
+    
+%>
+
+<!-- -->
+      <div class="col-md-6" >
+
+
+       
+
+
+
+      <div class="row" onmouseenter="canEdit(this)" onmouseleave="cantEdit(this)" onkeyup="canEdit(this)"  style="margin-bottom: 10px;"  >
+        <label class="lead labelcontrol" style="margin-right: 5px;margin-bottom: 10px;"> 
+
+ 
+         Q<%= count+1 %>
+  
+          </label>
+          <hr>
+          <div class="col-sm-8" >
+          <input  class="form-control" id="Question1"  name="<%= question %>"
+              value="<%=survey[question] %>" required readonly="readonly">
+
+            </div>
+
+            <a href="#" class="btn btn-white  col-md-1   d-none d-md-block d-none d-lg-block canEdit "  onclick="editable(this)"  style="visibility: hidden;">
+             
+              <i class="fas fa-pencil-alt fa-1x"></i>
+              </a>
+
+
+              <a href="#" class="btn btn-white btn-xs col-md-1  d-none d-md-block d-none d-lg-block canEdit" onclick="notEditable(this)" style="visibility: hidden;">
+             
+                <i class="far fa-stop-circle"></i>
+                </a>
+
+          </div>
+
+              <!---->
+
+
+
+
+
+
+
+               
+     
+      <% let anslength=question+"AnswerLength" %>
+      <div >
+      <ul class="list-group d-flex flex-wrap" style="list-style-type: none; margin-left: 15px;">
+      <% for (let count = 0; count < survey[anslength]; count++) { %>
+
+            
+          
+           
+           
+       <li>
+        
+        <div class="row"  onmouseenter="canEdit(this)" onmouseleave="cantEdit(this)" onkeyup="canEdit(this)" >
+          <input type="checkbox" disabled="disabled" class="checkbox d-none d-lg-block">
+          <div class="col-md-7">
+      <input  class=" form-control" id="<%= question+"Answer"+(count+1)%>" name="<%= question+"Answer"+(count+1)%>"
+          value="<%= survey[question+"Answer"+(count+1)] %>" required readonly="readonly" >
+        </div>
+
+        <a href="#" class="btn btn-white  col-md-1   d-none d-md-block d-none d-lg-block canEdit "  onclick="editable(this)" style="visibility: hidden;">
+             
+          <i class="fas fa-pencil-alt fa-1x"></i>
+          </a>
+
+
+          <a href="#" class="btn btn-white btn-xs col-md-1  d-none d-md-block d-none d-lg-block canEdit" onclick="notEditable(this)" style="visibility: hidden;">
+         
+            <i class="far fa-stop-circle"></i>
+            </a>
+
+        </div>
+        </li>
+         
+
+           <br>
+
+                   <% } %>
+                  </ul>
+                  </div>
+
+                  <div class="btn btn-primary  d-none d-sm-block d-md-none">Edit</div>
+
+                  <div class="btn btn-primary   d-block d-sm-none">Edit</div>
+              </div>
+  
+  
+  
+   
+
+  
+
+   <% } %>
+  </div>
+   <% } %>
+
+
+   <!--      -->
+      
+   
+   <!--    -->
+
+  
+    </td>
+
+    
+
+    <button type="submit" id="mcSubmit" class="btn btn-primary " ><i class="fa fa-check-square-o"></i> Submit</button>
+    <a href="/surveys" class="btn btn-warning"><i class="fa fa-undo"></i> Cancel</a>
+  
+</form>
+</div>
+
+ 
+<script>
+  function checkitout(e){
+ 
+   // e.preventDefault();
+    var check=document.getElementById('flexSwitchCheckChecked');
+
+ 
+ 
+
+ if(e.checked)
+ {
+  check.value="on"; 
+  var a=document.getElementById('ActiveState').value="on"; 
+ 
+ }
+else
+ { 
+  check.value="off";  
+  var a=document.getElementById('ActiveState').value="off";
+  
+ 
+ }
+// document.getElementById('form').submit();
+return true;
+
+  }
+</script>
+
+ 
+    <script src="/Scripts/i2.js">
+
+
+    </script>
+
+<% include ../partials/footer.ejs %>
+
+
+<!-- 
+  keeptitle seperate
+ 
+question:[
+{
+option1:"",
+responses:
+},
+{
+  opyion1:
+  respomses:
+}
+
+
+]
+
+
+
+-->

@@ -1,0 +1,97 @@
+<% include ../partials/header.ejs %>
+<%- include ../partials/mainNav.ejs %>
+
+<style>
+    #ijsQuestionlength
+    {
+        display:none ;
+    }
+    hr{
+      display: none;
+    }
+
+</style>
+    <!-- MAIN CONTENT -->
+
+   
+
+  <div class="container bg-white">
+    <h1><%= title %></h1>
+
+    <div class="row">
+    <h2 class="display-4 text-success"><%= survey.surveyName %></h2>
+
+    <p class="lead"> 
+        <%= survey.surveyDescription%>
+      </p>
+     </div>
+
+    <br><br><br><br>
+   <!--Questions-->
+
+   <%  if(survey.Questionnaire_type=="multiplechoice") { %>  
+    <div class="row">
+    <input id="ijsQuestionlength" name="Questionlength" value ="<%= survey.Questionlength %>">
+<% for (let count = 0; count < survey.Questionlength; count++) { %>
+    
+ 
+      <%
+      let question =`Question${count+1}`;
+      
+  %>
+        <div class="col-md-6">
+        <h3 class="lead"> Q<%= count+1%> <%= survey[question] %></h3>
+       
+        <% let anslength=question+"AnswerLength" %>
+        <div >
+        <ul class="list-group d-flex flex-wrap">
+        <% for (let count = 0; count < survey[anslength]; count++) { %>
+
+              
+            
+             
+             
+        <li class="list-group-item lead" id="<%= question+"Answer"+(count+1)%>"
+             ><%= survey[question+"Answer"+(count+1)] %></li>
+  
+             <br>
+ 
+                     <% } %>
+                    </ul>
+                    </div>
+                </div>
+    
+    
+    
+     
+
+    
+
+     <% } %>
+    </div>
+     <% } %>
+
+
+     <!--      -->
+        
+     
+     <!--    -->
+
+     <a href="/surveys/<%=survey._id %>" class="btn btn-primary ">
+        Edit
+        <i class="fas fa-pencil-alt"></i>
+        </a>
+      </td>
+
+  </div>
+
+
+
+    <!---->
+  
+    <script src="/Scripts/i2.js">
+
+
+    </script>
+
+<% include ../partials/footer.ejs %>

@@ -1,0 +1,170 @@
+<% include ../partials/header.ejs %>
+  <%- include ../partials/mainNav.ejs %>
+<style>
+  .questionline{
+    display: none;
+  }
+</style>
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1>
+            <%= title %>
+          </h1>
+          <!--This buttomn create a question-->
+
+          <div class="col-md-6">
+          </div>
+
+
+          <form class="form col-md-6" method="post" id="form" action="/surveys/add">
+        
+            <p>Add Questions To Survey </p>
+
+            
+          <div class="col-md-6 sticky">
+            
+            <% if(survey.Questionnaire_type==="multiplechoice") { %>
+            <div class="btn btn-primary sticky" id="addQuestion"  ><i class="fa fa-check-square-o"></i> Add Question</div>
+          
+        <input type="text" name="Questionnaire_type" value="multiplechoice" style="display:none"> 
+           
+         
+            <% } else { %>
+            <div class="btn btn-primary sticky" id="addQuestiontf" onclick="triggertf()" ><i class="fa fa-check-square-o"></i> Add Question</div>
+           
+            <input type="text" name="Questionnaire_type" value="true_or_false" style="display:none"> 
+            <% } %>
+           
+          </div>
+
+            <div class="form-group">
+
+            
+
+              <label for="surveyNameTextField">Survey Name</label>
+
+              <input type="text" class="form-control" id="surveyNameTextField" placeholder="Survey Name"
+                name="surveyName" value="<%= survey.surveyName %>" required>
+            </div>
+            <div class="form-group">
+              <label for="startDateField">Start Date</label>
+              <input type="date" class="form-control" id="startDateField" placeholder="MM/DD/YYYY"
+                onfocus="(this.type='date')" name="startDate" value="<%= survey.startDate %>" required>
+            </div>
+            <div class="form-group">
+              <label for="endDateField">End Date</label>
+              <input type="date" class="form-control" id="endDateField" placeholder="End Date" name="endDate"
+                value="<%= survey.endDate %>"  placeholder="MM/DD/YYYY"
+                onfocus="(this.type='date')" required>
+            </div>
+            <div class="form-group">
+              <label for="surveyDescription">Description</label>
+              <textarea name="surveyDescription" class="form-control"
+                id="surveyDescription"><%= survey.surveyDescription %> </textarea>
+
+            </div>
+            <input type="text" style="display: none;" id="createdDate" name="createdDate">
+            <button type="submit" class="btn btn-primary" onsubmit="creationDate()"><i class="fa fa-check-square-o"></i> Submit</button>
+            <a href="/surveys" class="btn btn-warning"><i class="fa fa-undo"></i> Cancel</a>
+
+            <!--  Add Questions-->
+            <!-- this input serves as a counter for the questions number created-->
+            <input type="text" name="Questionlength" value="" style="display:none;">
+            <input type="text" name="Questionlengthtf" value=""  style="display:none;">
+
+          </form>
+
+          <!--Make template questionnaire builder invisible -->
+
+          <div class="form-group question" id="question_sample" style="display: none;">
+            <hr class="questionline">
+            <label for="Question 1">Question 1</label>
+
+            <input type="text" class="form-control" id="Question1" placeholder=" Question 1" name="Question" value=""
+              required>
+
+            <!--Answer category -->
+            <div class="answerCategory" id="answerCategory">
+
+              <div id="answerSet" class="anAnswer" style="display: inline-block;">
+                <label for="Answer1" style="display: inline-block;">Answer 1</label>
+
+                <input type="text" class="form-control" id="Answer1" placeholder=" Answer 1" name="Answer1" value=""
+                  required style="width: 300px;display: inline-block;">
+
+                <div class="btn btn-primary" style="display:inline-block" id="removeAnswer"
+                  onclick="trigger2delete(this)"><i class="fa fa-check-square-o"></i> remove Answer</div>
+              </div>
+
+              <div class="btn btn-primary" style="display:inline-block" id="addAnswer" onclick="trigger2(this)"><i
+                  class="fas fa-plus"></i></div>
+
+
+
+            </div>
+            <hr class="questionline">
+
+            <input type="text" class="answerlength" value="1" style="display:none;">
+            
+
+             
+          </div>
+
+
+          <!-- True or False-->
+          
+          <div class="form-group question " id="question_sampletf" style="display: none;">
+            <hr class="questionline">
+            <label for="Question 1">Question 1</label>
+
+            <input type="text" class="form-control" id="Question1" placeholder=" Question 1" name="Question" value=""
+              required>
+
+            <!--Answer category -->
+            <div class="answerCategory" id="answerCategory">
+
+              <div id="answerSettf" class="anAnswer" style="display: inline-block;">
+
+               <!-- <label for="Answer1" style="display: inline-block;">Answer 1</label>
+
+                <input type="text" class="form-control" id="Answer1" placeholder=" Answer 1" name="Answer1" value=""
+                  required style="width: 300px;display: inline-block;">
+
+                            -->
+
+
+                  <input type="radio" id="" name="" value="true" onclick=""><label for="True">True</label><br>
+                  <input type="radio" id="" name="" value="false" onclick=""><label for="False">False</label><br>
+                
+
+
+
+                <div class="" style="display:inline-block" id="removeAnswer"
+                  onclick="trigger2delete(this)"><i class="fa fa-check-square-o"></i> </div>
+              </div>
+
+             
+
+
+
+            </div>
+            <hr class="questionline">
+
+            <input type="text" class="answerlength" value="1" style="display:none">       
+
+           </div>
+          <br><br><br>
+
+
+        </div>
+      </div>
+    </div>
+    <script src="/Scripts/i.js">
+
+
+    </script>
+
+    <% include ../partials/footer.ejs %>

@@ -1,0 +1,153 @@
+/*Custom Css goes here*/
+
+
+
+
+
+
+@media (min-width: 1199px) {
+    .datefont{
+           font-size: small;
+           text-align: left;
+       }
+       .col-md-3,.col-md-4,.col-md-2{
+         margin-left: 0px;
+         padding-left: 0px;
+         margin-top: 10px;
+
+       }
+
+       .borderightline{
+         border-right: 1px solid silver;
+         margin-right: 10px;
+       }
+
+       .surveys{
+         text-align: left;border:1px solid silver;padding: 10px; margin-bottom: 15px;
+         background-color:white;
+       }
+
+
+       .survey-item{
+        min-height: 50px;
+       
+       }
+
+
+     }
+     @media only screen and (min-width: 768px) {
+       .datefont{
+           font-size: small;
+           text-align: left;
+       }
+       .col-md-3,.col-md-4,.col-md-2{
+        
+         margin-top: 10px;
+
+       }
+
+       .borderightline{
+         border-right: 1px solid silver;
+  
+       }
+
+       .surveys{   
+         text-align: left;border:1px solid silver;padding: 10px; margin-bottom: 15px;
+         background-color:white;
+
+       }
+
+
+       .survey-item{
+        min-height: 50px;
+       }
+
+     }
+       
+       @media (max-width: 765px) { 
+         .surveys{
+         text-align:center ;border:1px solid silver;padding: 10px;
+         margin-bottom: 10px;  background-color:white;
+       }
+       
+       .makeinfohide{
+         display: none;
+       }
+
+       .borderightline{ 
+         margin-right: 10px;
+       }
+     }
+
+
+#logo {
+    height: auto;
+    width: auto;
+    max-height: 70px;
+    max-width: 70px;
+}
+
+footer {
+    margin-top: 120px;
+}
+
+#addQuestion {
+    margin-bottom: 30px;
+}
+
+#options {
+    display: none;
+}
+
+body{
+    background-color: #f0eeeea6; 
+}
+
+
+.sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0; 
+    left: 600px;  
+  }
+.space{
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.checkbox,.labelcontrol{
+    width:20px;
+    height:20px;
+}
+
+.opinionRow
+{
+    margin-bottom: 20px;;
+}
+
+/* Main section */
+.main{
+  background: url(./main\ copy.jpg) no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 95vh;
+}
+.main h3{
+  font-size: 4.4rem;
+  font-weight: 700;
+}
+.main .bt1{
+  height: 55px;
+  width: 138px;
+  background-color: #20844f;
+  color: white;
+  outline: none;
+  border: none;
+  font-weight: bold;
+  border-radius: 5px;
+}
+.main .bt1:hover{
+  background-color: #20844f;
+  transition: 0.5s;
+}
+

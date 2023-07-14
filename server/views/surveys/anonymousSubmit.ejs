@@ -1,0 +1,115 @@
+<% include ../partials/header.ejs %>
+<%- include ../partials/mainNav.ejs %>
+
+<style>
+    #ijsQuestionlength
+    {
+        display: none;
+    }
+</style>
+    <!-- MAIN CONTENT -->
+
+
+
+
+<form class="form-horizontal col-md-12" method="post" id="form">
+
+    <div class="container bg-white">
+      <h1><%= title %></h1>
+  
+      <div class="row">
+      <h2 class="display-4 text-success"><%= survey.surveyName %></h2>
+  
+      <p class="lead"> 
+          <%= survey.surveyDescription%>
+        </p>
+       </div>
+  
+      <br><br><br><br>
+     <!--Questions-->
+  
+     <%  if(survey.Questionnaire_type=="multiplechoice") { %>  
+      <div class="row">
+      <input id="ijsQuestionlength" name="Questionlength" value ="<%= survey.Questionlength %>">
+  <% for (let count = 0; count < survey.Questionlength; count++) { %>
+      
+   
+        <%
+        let question =`Question${count+1}`;
+        
+    %>
+          <div class="col-md-5" style="margin-left: 10px;">
+          <h3 class="lead"> Q<%= count+1%> <%= survey[question] %></h3>
+          
+          <input type="" id="" name="<%= question%>"  value="<%= survey[question] %>" style="display: none;">
+         
+          <% let anslength=question+"AnswerLength" %>
+          <div >
+          <ul class="list-group d-flex flex-wrap">
+          <% for (let count = 0; count < survey[anslength]; count++) { %>
+  
+                
+              
+            <div class="row">  
+               
+
+              
+          <li class="list-group-item lead" id="<%= question+"Answer"+(count+1)%>"
+               >
+
+                
+            <input type="radio" id="" name="<%= question+"Answer"%>"  value="<%= survey[question+"Answer"+(count+1)] %>" required>
+               
+               <%= survey[question+"Answer"+(count+1)] %></li>
+              </div> 
+               <br>
+   
+                       <% } %>
+                      </ul>
+                      </div>
+                  </div>
+      
+      
+      
+       
+  
+      
+  
+       <% } %>
+      </div>
+       <% } %>
+  
+  
+       <!--      -->
+          
+       
+       <!--    -->
+  
+       
+
+
+
+        <input type="text" class="form-control" id="surveyId"
+        placeholder="Survey Name" name="surveyId" value="<%= survey._id %>" style="display: none;">
+    
+        
+    
+        <button type="submit" class="btn btn-primary"><i class="fa fa-check-square-o"></i> Submit</button>
+        <a href="/surveys" class="btn btn-warning"><i class="fa fa-undo"></i> Cancel</a>
+  
+    </div>
+
+    
+     
+  
+
+    </form>
+  
+  
+ 
+    <script src="/Scripts/i.js">
+
+
+    </script>
+
+<% include ../partials/footer.ejs %>

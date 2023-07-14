@@ -1,0 +1,138 @@
+<!-- Main Navigation -->
+<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-success navbar-inverse" role="navigation"> -->
+ 
+ 
+  <nav class="navbar navbar-expand-lg navbar-dark bg-success navbar-inverse" role="navigation">
+    
+  <!-- <div class="collapse navbar-collapse navbar-ex1-collapse" id="navbarSupportedContent"> -->
+  <div class="container-fluid">
+      <a class="navbar-brand" href="/">
+        <img src="../../Assets/images/logo.jpg" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy" id="logo">
+        </a>
+    <button  
+    class="navbar-toggler hidden-md-up pull-right"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation" >
+        <span class="navbar-toggler-icon">
+        
+        </span>
+     
+      </button> 
+    
+      </div>
+      <div class="navbar-collapse collapse w-100 order-1 order-lg-0 dual-collapse2" id="navbarSupportedContent">
+  
+    <ul class="navbar-nav m-auto jus">
+
+
+      <% if (title == "Home"){ %>
+      <li class="nav-item active">
+      <% } else  { %>
+      <li class="nav-item">
+      <% } %>
+        <a class="nav-link" href="/home"><i class="fas fa-lg fa-laptop-house"></i> Home </a>
+      </li>
+
+
+      <% if (title == "Take a Survey") { %>
+        <li class="nav-item active">
+        <% } else  { %>
+        <li class="nav-item">
+        <% } %>
+          <a class="nav-link" href="/surveys/takeasurvey"><i class="fab fa-elementor"></i> Take a Survey </a>
+        </li>
+
+
+      <% if (title == "Existing Surveys") { %>
+      <li class="nav-item active">
+      <% } else  { %>
+      <li class="nav-item">
+      <% } %>
+        <a class="nav-link" href="/surveys"><i class="fab fa-elementor"></i> Existing Survey </a>
+      </li>
+
+     
+   
+    </ul>
+    
+    
+       <ul class="navbar-nav justify-content-end d-none d-md-block d-lg-none" >
+        <% if(typeof displayName == 'string' && displayName) { %>
+            <li class="navbar-text"><i class="fas fa-user"></i> Welcome, <%= displayName %></li>
+            <li class="nav-item"><a href="/logout" class="nav-link">
+             <i class="fas fa-sign-out-alt"></i>Logout</a></li>
+            
+        <% } else { %>
+    
+          <li class="nav-item"><a href="/login" class="nav-link">
+            <i class="fas fa-sign-in-alt"></i> Login</a></li>
+    
+            <li class="nav-item"><a href="/register" class="nav-link">
+              <i class="fa fa-user" aria-hidden="true"></i> Register</a></li>
+        <% } %>
+      </ul>
+
+
+
+      <ul class="navbar-nav justify-content-end d-none d-sm-block  d-md-none" >
+        <% if(typeof displayName == 'string' && displayName) { %>
+            <li class="navbar-text"><i class="fas fa-user"></i> Welcome, <%= displayName %></li>
+            <li class="nav-item"><a href="/logout" class="nav-link">
+             <i class="fas fa-sign-out-alt"></i>Logout</a></li>
+            
+        <% } else { %>
+    
+          <li class="nav-item"><a href="/login" class="nav-link">
+            <i class="fas fa-sign-in-alt"></i> Login</a></li>
+    
+            <li class="nav-item"><a href="/register" class="nav-link">
+              <i class="fa fa-user" aria-hidden="true"></i> Register</a></li>
+        <% } %>
+      </ul>
+
+
+      <ul class="navbar-nav justify-content-end d-block d-sm-none" >
+        <% if(typeof displayName == 'string' && displayName) { %>
+            <li class="navbar-text"><i class="fas fa-user"></i> Welcome, <%= displayName %></li>
+            <li class="nav-item"><a href="/logout" class="nav-link">
+             <i class="fas fa-sign-out-alt"></i>Logout</a></li>
+            
+        <% } else { %>
+    
+          <li class="nav-item"><a href="/login" class="nav-link">
+            <i class="fas fa-sign-in-alt"></i> Login</a></li>
+    
+            <li class="nav-item"><a href="/register" class="nav-link">
+              <i class="fa fa-user" aria-hidden="true"></i> Register</a></li>
+        <% } %>
+      </ul>
+   
+    
+    
+    </div>
+   
+<div class="navbar-collapse collapse w-100 order-3 dual-collapse2 justify-content-end">
+    <ul class="navbar-nav">
+      <% if(typeof displayName == 'string' && displayName) { %>
+          <li class="navbar-text"><i class="fas fa-user"></i> Welcome, <%= displayName %></li>
+          <li class="nav-item"><a href="/logout" class="nav-link">
+           <i class="fas fa-sign-out-alt"></i>Logout</a></li>
+          
+      <% } else { %>
+ 
+        <li class="nav-item"><a href="/login" class="nav-link">
+          <i class="fas fa-sign-in-alt"></i> Login</a></li>
+
+          <li class="nav-item"><a href="/register" class="nav-link">
+            <i class="fa fa-user" aria-hidden="true"></i> Register</a></li>
+      <% } %>
+    </ul>
+    
+  </div>
+
+</nav>
+ 

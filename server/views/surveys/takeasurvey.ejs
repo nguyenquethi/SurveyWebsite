@@ -1,0 +1,115 @@
+<% include ../partials/header.ejs %>
+<%- include ../partials/mainNav.ejs %>
+<style>
+</style>
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+      <div class="row">
+        <div class="col-md-offset-1 col-md-10">
+          <h3>Existing Survey List </h3>
+        
+          <br>
+          <% for (let count = 0; count < survey.length; count++) { %>
+              <% if(survey[count].active==="on"){%>
+          <div class="container surveys">
+            <div class="row survey-item">
+                <div class="col-md-4 set col-sm-12 " > 
+                    <div class="container customDiv2">
+                         
+                        <%= survey[count].surveyName %>
+                        
+                        <div class="row datefont makeinfohide  " style="padding-left: 0px;"> 
+                            <div class="col-md-6 set d-none d-sm-block "> Start Date:<%= survey[count].startDate%></div>
+                            <div class="col-md-6 set d-none d-sm-block"> End Date:<%= survey[count].endDate%></div>
+                        </div>
+    
+                    </div>    
+                    
+                    </div>
+        
+                    <div class="col-md-2 borderightline">
+
+
+                         <!--Visible only when small-->
+                         <div class="customDiv  d-none d-sm-block d-md-none">Created By<span><%= survey[count].surveyOwner %></span></div>
+                              
+                         <div class="customDiv  d-block d-sm-none">Created By<span><%= survey[count].surveyOwner %></span></div>
+                          <!--End-->
+                        <div class="customDiv  d-none d-md-block d-none d-lg-block">Created By
+                          <div class="row datefont makeinfohide  " style="padding-left: 0px;"> 
+                            <div class="col-md-6 set d-none d-sm-block "><%= survey[count].surveyOwner %></div>
+                            
+                        </div>
+                        </div>    
+                        
+                        </div>
+  
+                        <div class="col-md-2    borderightline ">
+                          
+                         <!--Visible only when small-->
+                         <div class="customDiv  d-none d-sm-block d-md-none">Participants<span><%= survey[count].respondents %></span></div>
+                              
+                         <div class="customDiv  d-block d-sm-none">Participants By<span><%= survey[count].respondents %></span></div>
+
+
+                            <div class="customDiv  d-none d-md-block d-none d-lg-block"> Responses
+
+                              <div class="row datefont makeinfohide  " style="padding-left: 0px;"> 
+                                <div class="col-md-6 set d-none d-sm-block "><%= survey[count].respondents %></div>
+                                
+                            </div>
+
+                            </div>   
+                            
+                            </div>
+    
+    
+                            <div class="col-md-2  borderightline">
+
+                              <!--Visible only when small-->
+                              <div class="customDiv  d-none d-sm-block d-md-none"><span><%= survey[count].Questionnaire_type %></span></div>
+                              
+                              <div class="customDiv  d-block d-sm-none"><span><%= survey[count].Questionnaire_type %></span></div>
+                               <!--End-->
+                                <div class="customDiv d-none d-md-block d-none d-lg-block">Survey Type
+
+                                  <div class="row datefont makeinfohide  " style="padding-left: 0px;"> 
+                                    <div class="col-md-6 set d-none d-sm-block "><%= survey[count].Questionnaire_type %></div>
+                                    
+                                </div>
+
+                                </div>    
+                                
+                       
+                                </div>
+
+                                <div class="col-md-1 col-sm-12 col-xs-12 ">
+                                  <div class="">
+                                      
+                    <a href="/surveys/takeasurvey/<%=survey[count]._id %>" class="btn btn-outline-success btn-sm col">
+                     
+                      <i class="fas fa-pencil-alt"></i>Take Survey
+                      </a>
+                                  </div>    
+                                  
+                                  </div>
+            </div>
+    </div>  
+
+    <% } %>
+
+      <% } %>
+<br><br><br><br><br><br><br><br><br><br>
+
+          
+           <div class="col-md-offset-1 col-md-10 text-center">
+            <ul class="pagination pagination-lg pager" id="myPager"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<% include ../partials/footer.ejs %>
+
+
